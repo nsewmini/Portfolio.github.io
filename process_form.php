@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = filter_var($_POST["message"], FILTER_SANITIZE_STRING);
 
     // Set recipient email address
-    $to = "sewminin3@email.com";
+    $to = "sewminin3@gmail.com"; 
 
     // Set email subject
     $email_subject = "New Message from $name: $subject";
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_message .= "Message:\n$message";
 
     // Set headers
-    $headers = "From: $email\r\n";
+    $headers = "From: sewminin3@gmail.com\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-type: text/plain; charset=utf-8\r\n";
 
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        $mail->setFrom($email);
+        $mail->setFrom('sewminin3@gmail.com'); // Replace with your actual email address
         $mail->addAddress($to);
         $mail->Subject = $email_subject;
         $mail->Body = $email_message;
@@ -44,4 +44,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
