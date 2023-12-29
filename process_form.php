@@ -1,4 +1,9 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get and sanitize form data
     $name = filter_var($_POST["name"], FILTER_SANITIZE_STRING);
@@ -18,19 +23,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_message .= "Subject: $subject\n\n";
     $email_message .= "Message:\n$message";
 
-    // Set additional headers
-    $headers = "From: $email\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-type: text/plain; charset=utf-8\r\n";
+    // Send the email using PHPMailer
+    $mail = new PHPMailer(true);
 
-    // Send the email
-    $success = mail($to, $email_subject, $email_message, $headers);
+    try {
+        $mail->setFrom($email);
+        $mail->addAddress($to);
+        $mail->Subject = $email_subject;
+        $mail->Body = $email_message;
 
-    if ($success) {
+        $mail->send();
         echo "Email sent successfully!";
-    } else {
-        echo "Error sending email.";
+    } catch (Exception $e) {
+        echo "Error sending email: {$mail->ErrorInfo}";
     }
 }
 ?>
-
