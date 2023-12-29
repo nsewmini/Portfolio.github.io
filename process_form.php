@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        $mail->setFrom('sewminin3@gmail.com'); // Replace with your actual email address
+        $mail->setFrom('sewminin3@gmail.com'); 
         $mail->addAddress($to);
         $mail->Subject = $email_subject;
         $mail->Body = $email_message;
